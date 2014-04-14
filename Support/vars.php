@@ -8,8 +8,9 @@ $api_key  = $config->api_key;   //getenv('SHOPIFY_API_KEY');
 $password = $config->password;  //getenv('SHOPIFY_PASSWORD');
 $store    = $config->store;     //getenv('SHOPIFY_STORE');
 $theme_id = $config->theme_id;  //getenv('SHOPIFY_THEME_ID');
-$js_files = $config->js_files;  //getenv('SHOPIFY_JS_FILES');
-  
+$js_files = $config->js_files;
+$minified_js_file = $config->minified_js_file;
+
 define('TM_PROJECT_DIRECTORY',getenv('TM_PROJECT_DIRECTORY'));
 
 // Ok, api has updated so you can PUT in json, but really no value in re-writing everything

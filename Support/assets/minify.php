@@ -16,7 +16,7 @@ if (!empty($jsFilepaths)) {
   system(sprintf('uglifyjs %1$s -m -c -o %2$s', implode(" ",$jsFilepaths), $filePath));
   echo 'Done.';
 } else {
-  echo "No Javascript Files found to minify."
+  echo "No Javascript Files found to minify.";
 }
 
 
