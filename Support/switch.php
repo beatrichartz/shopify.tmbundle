@@ -32,7 +32,7 @@ if(empty($response)) {
 
 $xml = new SimpleXMLElement($response);
 
-for ($i=0; $i < count($xml->dict->key); $i++) { 
+for ($i=0; $i < count($xml->dict->key); $i++) {
     if('title' == $xml->dict->key[$i]) {
         $shops['use'] = (string)$xml->dict->string[$i];
     }

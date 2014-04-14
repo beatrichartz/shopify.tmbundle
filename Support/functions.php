@@ -61,16 +61,17 @@ function output_error($response, $options = array()) {
  * Request an Asset from Shopify
  *
  * @param string $api_key
- * @param string $password 
+ * @param string $password
  * @param string $store
+ * @param string $theme_id
  * @param string $key Key of asset we are downloading
  * @return object Asset / false on failure
  **/
-function get_asset($api_key, $password, $store, $key) {
+function get_asset($api_key, $password, $store, $theme_id, $key) {
     //Request Asset URL Template
     // %1: API KEY, %2: PASSWORD, %3: STORE, %4: ASSET NAME
-    $requestUrl = sprintf('https://%1$s:%2$s@%3$s/admin/assets.json?asset[key]=%4$s',
-                    $api_key, $password, $store, $key
+    $requestUrl = sprintf('https://%1$s:%2$s@%3$s/admin/themes/%4$s/assets.json?asset[key]=%5$s',
+                    $api_key, $password, $store, $theme_id, $key
                 );
 
     $responseTxt = `curl -s -g '$requestUrl'`;
@@ -86,15 +87,16 @@ function get_asset($api_key, $password, $store, $key) {
 /**
  * Send an theme asset to shopify
  * @param string $api_key
- * @param string $password 
+ * @param string $password
  * @param string $store
+ * @param string $theme_id
  * @param string $xmlFile Path to the XML File with the contents to upload.
  * @return string
  **/
-function send_asset($api_key, $password, $store ,$xmlFile) {
+function send_asset($api_key, $password, $store, $theme_id, $xmlFile) {
 
-    $requestUrl = sprintf('https://%1$s:%2$s@%3$s/admin/assets.xml', 
-            $api_key, $password, $store
+    $requestUrl = sprintf('https://%1$s:%2$s@%3$s/admin/themes/%4$s/assets.xml', 
+            $api_key, $password, $store, $theme_id
         );
 
     // Right now, not bothering with dumping the full response/error handling. Will add if it becomes an issue. 
@@ -108,16 +110,17 @@ function send_asset($api_key, $password, $store ,$xmlFile) {
  * Remove an Asset from Shopify
  *
  * @param string $api_key
- * @param string $password 
+ * @param string $password
  * @param string $store
+ * @param string $theme_id
  * @param string $key Key of asset we are downloading
  * @return object Asset / false on failure
  **/
-function remove_asset($api_key, $password, $store, $key) {
+function remove_asset($api_key, $password, $store, $theme_id, $key) {
     //Request Asset URL Template
     // %1: API KEY, %2: PASSWORD, %3: STORE, %4: ASSET NAME
-    $requestUrl = sprintf('https://%1$s:%2$s@%3$s/admin/assets.json?asset[key]=%4$s',
-                    $api_key, $password, $store, $key
+    $requestUrl = sprintf('https://%1$s:%2$s@%3$s/admin/themes/%4$s/assets.json?asset[key]=%5$s',
+                    $api_key, $password, $store, $theme_id, $key
                 );
                 
     $response = `curl -w'%{http_code}' -X DELETE -s -g '$requestUrl'`;

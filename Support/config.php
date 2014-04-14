@@ -6,7 +6,7 @@ define('CONFIG_FILE_PATH', getenv('TM_PROJECT_DIRECTORY').DIRECTORY_SEPARATOR.'.
 * Config
 *
 * ummm... for loading up any needed configs
-* 
+*
 */
 class mConfig {
     
@@ -18,9 +18,11 @@ class mConfig {
     
     var $store = null;
     
+    var $theme_id = null;
+    
     //Used to output to user what shop they are pushing to. Reads better than full shop name.
     var $current = 'default';
-    
+        
     function __construct($path) {
 
         $this->ini_path = $path;
@@ -33,8 +35,9 @@ class mConfig {
             $this->api_key  = getenv('SHOPIFY_API_KEY');
             $this->password = getenv('SHOPIFY_PASSWORD');
             $this->store    = getenv('SHOPIFY_STORE');
+            $this->theme_id = getenv('SHOPIFY_THEME_ID');
 
-            if( (!$this->api_key) || (!$this->password) || (!$this->store) ) {
+            if( (!$this->api_key) || (!$this->password) || (!$this->store) || (!$this->theme_id) ) {
                 echo "No config file found here: {$path} ?";
                 echo "I can't seem to find your API Key, Password or Store.";
                 exit();
@@ -105,7 +108,7 @@ class mConfig {
         $settings = $config[$config['use']];
 
         foreach ($settings as $key => $value) {
-            $this->{$key} = $value;
+          $this->{$key} = $value;
         }
     }
 

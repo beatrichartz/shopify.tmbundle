@@ -1,5 +1,5 @@
 <?php
-$assetKey = calc_asset_key(getenv('TM_FILEPATH')); 
+$assetKey = calc_asset_key(getenv('TM_FILEPATH'));
 
 //if its an image file, throw an error message.
 if(is_binary(getenv('TM_FILEPATH'))) {
@@ -14,14 +14,14 @@ $reqData = sprintf($xmlDataTemp, $filecontents, $assetKey);
 $xmlFile = tempnam('/tmp', 'foo').'.xml';
 file_put_contents($xmlFile, $reqData);
 
-$response = send_asset($api_key, $password, $store ,$xmlFile);
+$response = send_asset($api_key, $password, $store, $theme_id, $xmlFile);
 
 if('200' == response_code($response)) {
     echo "Uploaded {$assetKey} to {$config->current}.";
 } else {
-    // Not ideal, but it works. Problem (though not much of one ): 
+    // Not ideal, but it works. Problem (though not much of one ):
     // response on a fail will return the full curl page: ie, shopify 404 full html, + error code at the bottom
-    // Will robustify if it becomes an issue. 
+    // Will robustify if it becomes an issue.
     echo "*Error: Could not upload {$assetKey} to {$config->current}." ;
     output_error($response);
 }
