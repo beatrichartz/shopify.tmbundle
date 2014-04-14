@@ -20,7 +20,9 @@ class mConfig {
     
     var $theme_id = null;
     
-    var $js_files = null;
+    var $js_files = array();
+    
+    var $minified_js_file = 'application.min.js';
     
     //Used to output to user what shop they are pushing to. Reads better than full shop name.
     var $current = 'default';
@@ -38,7 +40,6 @@ class mConfig {
             $this->password = getenv('SHOPIFY_PASSWORD');
             $this->store    = getenv('SHOPIFY_STORE');
             $this->theme_id = getenv('SHOPIFY_THEME_ID');
-            $this->js_files = getenv('SHOPIFY_JS_FILES');
 
             if( (!$this->api_key) || (!$this->password) || (!$this->store) || (!$this->theme_id) ) {
                 echo "No config file found here: {$path} ?";

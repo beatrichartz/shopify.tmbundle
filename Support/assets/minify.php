@@ -1,6 +1,6 @@
 <?php
 // This one is just for Saving and Uploading a Text based file you working on.
-echo "<h2>Minifying Javascripts to application.min.js</h3>";
+echo "<h2>Minifying Javascripts to ".$minified_js_file."</h2>";
 
 function mapToAssetPaths($n)
 {
@@ -8,14 +8,15 @@ function mapToAssetPaths($n)
     return("$projectDirectory/assets/$n");
 }
 
-$jsFiles          = explode(",",$js_files);
-$jsFilepaths      = array_map("mapToAssetPaths", $jsFiles);
+$jsFilepaths      = array_map("mapToAssetPaths", $js_files);
+$filePath         = getenv('TM_PROJECT_DIRECTORY')."/assets/".$minified_js_file;
+
+if (!empty($jsFilepaths)) {
+  echo "Minifying Javascript to {$filePath}...<br>";
+  system(sprintf('uglifyjs %1$s -m -c -o %2$s', implode(" ",$jsFilepaths), $filePath));
+  echo 'Done.';
+} else {
+  echo "No Javascript Files found to minify."
+}
 
 
-$filePath         = getenv('TM_PROJECT_DIRECTORY')."/assets/application.min.js";
-
-echo "Minifying Javascript to {$filePath}...<br>";
-
-system(sprintf('uglifyjs %1$s -m -c -o %2$s', implode(" ",$jsFilepaths), $filePath));
-
-echo 'Done.';
