@@ -10,7 +10,7 @@ foreach ($selectedFiles as $file) {
     if(is_dir($file) || empty($file)) {
         continue;
     }
-
+    
     $assetKey = calc_asset_key($file);
 
     //Get the extension
@@ -29,7 +29,7 @@ foreach ($selectedFiles as $file) {
     file_put_contents($xmlFile, $reqData);
 
     echo "Sending asset: {$assetKey}...<br>";
-    $response = send_asset($api_key, $password, $store ,$xmlFile);
+    $response = send_asset($api_key, $password, $store, $theme_id, $xmlFile);
 
     if('200' == response_code($response)) {
         echo "Uploaded: {$assetKey}<br>";

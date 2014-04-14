@@ -27,8 +27,8 @@ module ShopFilter
   end
   
   def img_tag(url, alt="")
-    %|<img src="#{url}" alt="#{alt}" />|  
-  end  
+    %|<img src="#{url}" alt="#{alt}" />|
+  end
   
   def link_to_vendor(vendor)
     if vendor
@@ -62,27 +62,27 @@ module ShopFilter
     
     case style
     when 'original'
-      return '/files/shops/random_number/' + url 
+      return '/files/shops/random_number/' + url
     when 'grande', 'large', 'medium', 'small', 'thumb', 'icon'
-      "/files/shops/random_number/products/#{$1}_#{style}.#{$2}"              
+      "/files/shops/random_number/products/#{$1}_#{style}.#{$2}"
     else
-      raise ArgumentError, 'valid parameters for filter "size" are: original, grande, large, medium, small, thumb and icon '      
+      raise ArgumentError, 'valid parameters for filter "size" are: original, grande, large, medium, small, thumb and icon '
     end
   end
   
   def default_pagination(paginate)
     
-    html = []    
+    html = []
     html << %(<span class="prev">#{link_to(paginate['previous']['title'], paginate['previous']['url'])}</span>) if paginate['previous']
 
     for part in paginate['parts']
 
       if part['is_link']
-        html << %(<span class="page">#{link_to(part['title'], part['url'])}</span>)        
+        html << %(<span class="page">#{link_to(part['title'], part['url'])}</span>)
       elsif part['title'].to_i == paginate['current_page'].to_i
-        html << %(<span class="page current">#{part['title']}</span>)        
+        html << %(<span class="page current">#{part['title']}</span>)
       else
-        html << %(<span class="deco">#{part['title']}</span>)                
+        html << %(<span class="deco">#{part['title']}</span>)
       end
       
     end

@@ -2,12 +2,14 @@
 include getenv('TM_BUNDLE_SUPPORT').DIRECTORY_SEPARATOR.'config.php';
 $config = new mConfig(CONFIG_FILE_PATH);
 
-// We use getenv instead of $_ENV since $_ENV may be turned off in people's systems. 
+// We use getenv instead of $_ENV since $_ENV may be turned off in people's systems.
 // Basically, just trying to be nice about it.
-$api_key = $config->api_key;    //getenv('SHOPIFY_API_KEY');
+$api_key  = $config->api_key;   //getenv('SHOPIFY_API_KEY');
 $password = $config->password;  //getenv('SHOPIFY_PASSWORD');
-$store = $config->store;        //getenv('SHOPIFY_STORE');
-
+$store    = $config->store;     //getenv('SHOPIFY_STORE');
+$theme_id = $config->theme_id;  //getenv('SHOPIFY_THEME_ID');
+$js_files = $config->js_files;  //getenv('SHOPIFY_JS_FILES');
+  
 define('TM_PROJECT_DIRECTORY',getenv('TM_PROJECT_DIRECTORY'));
 
 // Ok, api has updated so you can PUT in json, but really no value in re-writing everything
